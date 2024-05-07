@@ -8,12 +8,13 @@ const SocketContext = createContext();
 // Create a context provider component
 export const SocketProvider = ({ children }) => {
     const [socket, setSocket] = useState(null);
-
+     const [socketLoaded , setSocketLoader]  = useState(false)
     useEffect(() => {
+         if(socketLoaded) return
         // Initialize the socket connection when component mounts
         const newSocket = io('http://localhost:2000'); // Replace URL with your server URL
         setSocket(newSocket);
-
+        setSocketLoader(true)
         // Clean up the socket connection when component unmounts
         return () => {
             newSocket.close();

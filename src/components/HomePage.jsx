@@ -24,9 +24,6 @@ function HomePage({children}) {
    },[])
 
 
-  //  const compileCode = useCallback(()=>{
-   
-  //  },[])
 
 
 

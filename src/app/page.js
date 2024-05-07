@@ -11,7 +11,7 @@ export default function Home() {
            <Compiler />
        </div>
 
-       <div className='col-2 '>
+       <div className='col-6'>
                 <Output />
          </div> 
    </>
