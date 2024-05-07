@@ -14,7 +14,7 @@ export const SocketProvider = ({ children }) => {
          if(socketLoaded) return
          // Initialize the socket connection when component mounts
 
-        const newSocket = io('http://localhost:2000'); // Replace URL with your server URL
+        const newSocket = io(process.env.NEXT_PUBLIC_API_URL); // Replace URL with your server URL
         setSocket(newSocket);
         setLoader(true)
         // Clean up the socket connection when component unmounts

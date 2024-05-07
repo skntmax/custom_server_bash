@@ -6,14 +6,12 @@ import { useSelector } from 'react-redux';
 import { useSocket } from './SocketProvider';
 function Output() {
     const socket = useSocket()
-  let status = useSelector(e=> e.setLanguage)
      // Create a ref for the terminal DOM element
      const termRef = useRef(null);
      
       useEffect(() => {
          // Create a new terminal instance
          const terminal = new Terminal({
-          
           cursorStyle: 'block', // 'block', 'underline', 'bar'
           cursorBlink: true, // Cursor should blink
           fontFamily: 'Courier New, monospace',
@@ -46,7 +44,7 @@ function Output() {
          };
 
 
-     }, [status]);
+     }, []);
 
    return (
             <div ref={termRef} style={{

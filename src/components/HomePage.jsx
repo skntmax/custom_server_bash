@@ -7,22 +7,6 @@ import { runCode, setCode, setLanguage, setOutput } from '@/lib/compiler'
 
 
 function HomePage({children}) {
-   
-  let dispatch = useDispatch()
-  const socket = useSocket()
-  const status = useSelector(ele=> ele.setLanguage)
-  //  useEffect(()=>{
-     
-  //    socket.on('terminal:result',(res)=>{
-  //     console.log("res>>>",res)
-  //      dispatch(setOutput({
-  //       output:res
-  //      }))
-        
-  //   })
-     
-  //  },[])
-
 
   return (
     <>
@@ -30,8 +14,7 @@ function HomePage({children}) {
      <Navbar />
       <div className='row'>
        <div className='col-12 ' >
-          
-          
+
         </div>
       
          {children}
