@@ -1,7 +1,7 @@
 'use client'
 import React, { createRef, useEffect, useRef } from 'react'
 import { Terminal } from '@xterm/xterm';
-import '@xterm/xterm/css/xterm.css';
+import 'xterm/css/xterm.css';
 import { useSelector } from 'react-redux';
 import { useSocket } from './SocketProvider';
 function Output() {
@@ -13,6 +13,7 @@ function Output() {
       useEffect(() => {
          // Create a new terminal instance
          const terminal = new Terminal({
+          
           cursorStyle: 'block', // 'block', 'underline', 'bar'
           cursorBlink: true, // Cursor should blink
           fontFamily: 'Courier New, monospace',
@@ -30,11 +31,10 @@ function Output() {
              terminal.open(termRef.current);
          }
 
-         if(status?.output && status.run ) {
-             terminal.write(status?.output);
-           }
-
-         
+          socket.on('terminal:result' ,data=>{
+            terminal.write(data)
+          })
+          
             terminal.onData(data=>{
                   socket.emit("bash:write", data )
             })
@@ -46,10 +46,14 @@ function Output() {
          };
 
 
-     }, [status?.output]);
+     }, [status]);
 
    return (
-            <div ref={termRef}  />
+            <div ref={termRef} style={{
+               height: "100%",
+            width: "100%",
+            overflow: "hidden"
+            }}        />
   )
 }
 

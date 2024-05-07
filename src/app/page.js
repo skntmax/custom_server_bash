@@ -7,11 +7,7 @@ export default function Home() {
    
   return (
    <>
-   <div className='col-6 border'>
-           <Compiler />
-       </div>
-
-       <div className='col-2 '>
+   <div className='col-12 border'>
                 <Output />
          </div> 
    </>
