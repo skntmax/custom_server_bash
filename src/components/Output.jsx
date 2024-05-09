@@ -12,6 +12,7 @@ function Output() {
       useEffect(() => {
          // Create a new terminal instance
          const terminal = new Terminal({
+           height:"100vh",
           cursorStyle: 'block', // 'block', 'underline', 'bar'
           cursorBlink: true, // Cursor should blink
           fontFamily: 'Courier New, monospace',
@@ -49,8 +50,8 @@ function Output() {
    return (
             <div ref={termRef} style={{
                height: "100%",
-            width: "100%",
-            overflow: "hidden"
+              width: "100%",
+              overflow: "hidden"
             }}        />
   )
 }

@@ -6,12 +6,7 @@ import io from 'socket.io-client';
 const SocketContext = createContext();
 
 // Create a context provider component
-var options = {
-    rememberUpgrade:true,
-    transports: ['websocket'],
-    secure:true, 
-    rejectUnauthorized: false
-        }
+
 
 export const SocketProvider = ({ children }) => {
     const [socket, setSocket] = useState(null);
@@ -21,7 +16,7 @@ export const SocketProvider = ({ children }) => {
          if(socketLoaded) return
          // Initialize the socket connection when component mounts
 
-        const newSocket = io(process.env.NEXT_PUBLIC_API_URL ,options); // Replace URL with your server URL
+        const newSocket =new io(process.env.NEXT_PUBLIC_API_URL ); // Replace URL with your server URL
         setSocket(newSocket);
         setLoader(true)
         // Clean up the socket connection when component unmounts
