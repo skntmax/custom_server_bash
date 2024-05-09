@@ -5,23 +5,22 @@ import { SocketProvider, useSocket } from './SocketProvider'
 import { useDispatch, useSelector } from 'react-redux'
 import { runCode, setCode, setLanguage, setOutput } from '@/lib/compiler'
 
-
 function HomePage({children}) {
    
   let dispatch = useDispatch()
   const socket = useSocket()
   const status = useSelector(ele=> ele.setLanguage)
-   useEffect(()=>{
-     
-     socket.on('terminal:result',(res)=>{
-      console.log("res>>>",res)
-       dispatch(setOutput({
-        output:res
-       }))
+
+  //  useEffect(()=>{
+
+  //    socket.on('terminal:result',(res)=>{   
+  //     dispatch(setOutput({
+  //       output:res
+  //      }))
         
-    })
+  //   })
      
-   },[])
+  //  },[])
 
 
 

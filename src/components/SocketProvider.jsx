@@ -16,9 +16,9 @@ export const SocketProvider = ({ children }) => {
         setSocket(newSocket);
         setSocketLoader(true)
         // Clean up the socket connection when component unmounts
-        return () => {
-            newSocket.close();
-        };
+        // return () => {
+        //     newSocket.close();
+        // };
          
     }, []);
 

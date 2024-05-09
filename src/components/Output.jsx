@@ -2,17 +2,21 @@
 import React, { createRef, useEffect, useRef } from 'react'
 import { Terminal } from '@xterm/xterm';
 import '@xterm/xterm/css/xterm.css';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { useSocket } from './SocketProvider';
+import { runCode, setOutput } from '@/lib/compiler';
 function Output() {
     const socket = useSocket()
-  let status = useSelector(e=> e.setLanguage)
+   const dispatch = useDispatch()
+    let status = useSelector(e=> e.setLanguage)
      // Create a ref for the terminal DOM element
      const termRef = useRef(null);
-     
+     let terminal
+    
       useEffect(() => {
          // Create a new terminal instance
-         const terminal = new Terminal({
+         
+          terminal = new Terminal({
           cursorStyle: 'block', // 'block', 'underline', 'bar'
           cursorBlink: true, // Cursor should blink
           fontFamily: 'Courier New, monospace',
@@ -23,30 +27,34 @@ function Output() {
               cursor: '#c5c8c6', // Cursor color
               selection: '#373b41', // Selection color
           }
-      });
- 
+        });
+         
          // Open the terminal in the DOM element referenced by termRef
          if (termRef.current) {
              terminal.open(termRef.current);
          }
 
-         if(status?.output && status.run ) {
-             terminal.write(status?.output);
-           }
+         socket.on('terminal:result',(res)=>{   
+          dispatch(setOutput({
+            output:res
+           }))
+          })
 
+         if( status.run ) {
+          terminal.write(status?.output);
+          dispatch(runCode({
+              run:false
+          }))
+        }
          
-            terminal.onData(data=>{
-                  socket.emit("bash:write", data )
-            })
+           
           
          // Return a cleanup function to dispose of the terminal when the component unmounts
          
-          return () => {
-             terminal.dispose();
-         };
+       
 
+     }, [status.run]);
 
-     }, [status?.output]);
 
    return (
             <div ref={termRef}  />

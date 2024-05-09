@@ -16,8 +16,9 @@ function Compiler() {
   }
 
   function showValue() {
-    alert(editorRef.current.getValue());
+        alert(editorRef.current.getValue());
   } 
+   
   
   return (
     <div>
@@ -28,9 +29,11 @@ function Compiler() {
         defaultValue="// some comment"
         onMount={handleEditorDidMount}
         onChange={(value , editor)=>{
+          
           dispatch(setCode({
             code:value
           }))
+           
         }}
       />
     </div>
