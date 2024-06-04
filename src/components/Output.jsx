@@ -1,5 +1,5 @@
 'use client'
-import React, { createRef, useEffect, useRef } from 'react'
+import React, { createRef, useDebugValue, useEffect, useRef } from 'react'
 import { Terminal } from '@xterm/xterm';
 import '@xterm/xterm/css/xterm.css';
 import { useDispatch, useSelector } from 'react-redux';
@@ -11,12 +11,11 @@ function Output() {
     let status = useSelector(e=> e.setLanguage)
      // Create a ref for the terminal DOM element
      const termRef = useRef(null);
-     let terminal
+      let terminal
     
       useEffect(() => {
          // Create a new terminal instance
-         
-          terminal = new Terminal({
+           terminal = new Terminal({
           cursorStyle: 'block', // 'block', 'underline', 'bar'
           cursorBlink: true, // Cursor should blink
           fontFamily: 'Courier New, monospace',
@@ -34,26 +33,35 @@ function Output() {
              terminal.open(termRef.current);
          }
 
-         socket.on('terminal:result',(res)=>{   
-          dispatch(setOutput({
-            output:res
-           }))
-          })
 
          if( status.run ) {
-          terminal.write(status?.output);
+          // terminal.write(status?.output);
           dispatch(runCode({
               run:false
           }))
         }
          
-           
-          
-         // Return a cleanup function to dispose of the terminal when the component unmounts
+  
+          // Return a cleanup function to dispose of the terminal when the component unmounts
          
-       
+     }, []);
 
-     }, [status.run]);
+
+     useEffect(()=>{
+       
+      socket.on('terminal:result',(res)=>{   
+        console.log("dkdksd",res )
+          // terminal.write(status?.output);
+
+        dispatch(setOutput({
+          output:res
+         }))
+        })
+
+
+     },[])
+
+     
 
 
    return (

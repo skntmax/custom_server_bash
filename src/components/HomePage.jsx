@@ -14,9 +14,8 @@ function HomePage({children}) {
   //  useEffect(()=>{
 
   //    socket.on('terminal:result',(res)=>{   
-  //     dispatch(setOutput({
-  //       output:res
-  //      }))
+  //     console.log("terminal:result",res )
+  //     dispatch(setOutput({ output:res }))
         
   //   })
      
@@ -40,7 +39,7 @@ function HomePage({children}) {
                  
              }} 
              className='w-50' defaultValue={"choose language"}>
-                 {["javascript",'python'].map(ele=>(
+                 {["JAVASCRIPT",'PYTHON'].map(ele=>(
                       <option value={ele}>
                          {ele}  
                      </option>

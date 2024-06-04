@@ -3,7 +3,7 @@ import { createSlice } from '@reduxjs/toolkit'
 export const setLanguageSlice = createSlice({
   name: 'compiler',
   initialState: {
-    language: "js",
+    language: "JAVASCRIPT",
     code:"",
     run:false,
     output:""
@@ -20,7 +20,6 @@ export const setLanguageSlice = createSlice({
       runCode: (state, action) => {
         state.run = action.payload.run
       },
-
 
       setOutput: (state, action) => {
         state.output = action.payload.output
